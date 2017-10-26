@@ -5,32 +5,50 @@
 *&---------------------------------------------------------------------*
 REPORT z_invoice_items_euro.
 
-class lcl_main definition create private.
+CLASS lcl_main DEFINITION CREATE PRIVATE.
 
-  public section.
+  PUBLIC SECTION.
     CLASS-METHODS create
       RETURNING
-        value(r_result) TYPE REF TO lcl_main.
-    methods run.
-  protected section.
-  private section.
+        VALUE(r_result) TYPE REF TO lcl_main.
+    METHODS run.
+  PROTECTED SECTION.
+  PRIVATE SECTION.
 
-endclass.
+ENDCLASS.
 
-class lcl_main implementation.
+CLASS lcl_main IMPLEMENTATION.
 
-  method create.
+  METHOD create.
 
-    create object r_result.
+    CREATE OBJECT r_result.
 
-  endmethod.
+  ENDMETHOD.
 
-  method run.
-     WRITE: 'Hello World!'.
-  endmethod.
+  METHOD run.
 
-endclass.
+    DATA: invoices TYPE REF TO zcl_invoice_retrieval.
 
-start-of-selection.
+    invoices = NEW zcl_invoice_retrieval( ).
 
-lcl_main=>create( )->run(  ).
+    DATA(invoice_items) = invoices->get_items_from_db( ).
+
+    cl_salv_table=>factory(
+*  EXPORTING
+*    list_display   = IF_SALV_C_BOOL_SAP=>FALSE    " ALV Displayed in List Mode
+*    r_container    =     " Abstract Container for GUI Controls
+*    container_name =
+      IMPORTING
+        r_salv_table   =    DATA(alv_table)
+      CHANGING
+        t_table        =  invoice_items ).
+    "CATCH cx_salv_msg.    "
+    alv_table->display( ).
+
+  ENDMETHOD.
+
+ENDCLASS.
+
+START-OF-SELECTION.
+
+  lcl_main=>create( )->run(  ).

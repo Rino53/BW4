@@ -14,6 +14,9 @@ CLASS zcl_invoice_retrieval DEFINITION
       RETURNING
         VALUE(lt_result) TYPE ty_table_of_zso_invoice_item.
 
+    "! <p class="shorttext synchronized" lang="en">Read items from DB via AMDP</p>
+    "! @parameter zcurrency_code | <p class="shorttext synchronized" lang="en">Currency Code passed from program</p>
+    "! @parameter lt_result | <p class="shorttext synchronized" lang="en">Table of invoice items</p>
     METHODS get_items_from_db_amdp
     IMPORTING value(zcurrency_code) type snwd_curr_code
     EXPORTING value(lt_result) TYPE ty_table_of_zso_invoice_item.

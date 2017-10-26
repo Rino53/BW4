@@ -21,6 +21,12 @@
      <LANGU>E</LANGU>
      <DESCRIPT>Read items from DB</DESCRIPT>
     </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_INVOICE_RETRIEVAL</CLSNAME>
+     <CMPNAME>GET_ITEMS_FROM_DB_AMDP</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Read items from DB via AMDP</DESCRIPT>
+    </SEOCOMPOTX>
    </DESCRIPTIONS>
   </asx:values>
  </asx:abap>

@@ -4,17 +4,19 @@ CLASS zcl_invoice_retrieval DEFINITION
   CREATE PUBLIC .
 
   PUBLIC SECTION.
+    "!  <p class="shorttext synchronized" lang="en">Generated type</p>
     TYPES: ty_table_of_zso_invoice_item TYPE STANDARD TABLE OF zso_invoice_item WITH DEFAULT KEY.
-    "! AMDP Market Interface for AMDP
+    "! AMDP Marker Interface for AMDP
            INTERFACES: if_amdp_marker_hdb.
     "! <p class="shorttext synchronized" lang="en">Read items from DB</p>
-    "! Method reads invoice items from database
+    "! Method reads invoice items from database using classic SQL query
     "! @parameter lt_result | <p class="shorttext synchronized" lang="en">Table of invoice items</p>
     METHODS get_items_from_db
       RETURNING
         VALUE(lt_result) TYPE ty_table_of_zso_invoice_item.
 
     "! <p class="shorttext synchronized" lang="en">Read items from DB via AMDP</p>
+    "! Method reads invoice items from database using AMDP approach
     "! @parameter zcurrency_code | <p class="shorttext synchronized" lang="en">Currency Code passed from program</p>
     "! @parameter lt_result | <p class="shorttext synchronized" lang="en">Table of invoice items</p>
     METHODS get_items_from_db_amdp
@@ -27,11 +29,11 @@ CLASS zcl_invoice_retrieval DEFINITION
 ENDCLASS.
 
 
-
 CLASS zcl_invoice_retrieval IMPLEMENTATION.
 
   METHOD get_items_from_db.
 
+"Check that the SQL syntax in ABAP SQL is different to HANA AMDP version
     SELECT
        snwd_bpa~company_name,
        snwd_so_inv_item~gross_amount,

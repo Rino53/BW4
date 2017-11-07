@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" id="ZTIME_MONTH" applyPrivilegeType="ANALYTIC_PRIVILEGE" dataCategory="DIMENSION" dimensionType="TIME" schemaVersion="2.3" defaultClient="$$client$$" visibility="internal" outputViewType="Projection" calculationScenarioType="TREE_BASED">
+<descriptions defaultDescription="ZTIME_MONTH"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="M_TIME_DIMENSION_MONTH" type="DATA_BASE_TABLE">
+    <viewAttributes allViewAttributes="true"/>
+    <columnObject schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION_MONTH"/>
+  </DataSource>
+</dataSources>
+<calculationViews/>
+<inlineHierarchy xsi:type="Dimension:LeveledHierarchy" id="Gregorian_Hierarchy" rootNodeVisibility="ADD_ROOT_NODE" withRootNode="true">
+  <descriptions defaultDescription="Gregorian_Hierarchy"/>
+  <levels>
+    <level levelAttribute="#YEAR" levelType="MDLEVEL_TYPE_TIME_YEARS" order="1" orderAttribute="#YEAR" sortDirection="ASC"/>
+    <level levelAttribute="#HALFYEAR" levelType="MDLEVEL_TYPE_TIME_HALF_YEAR" order="2" orderAttribute="#HALFYEAR" sortDirection="ASC"/>
+    <level levelAttribute="#QUARTER" levelType="MDLEVEL_TYPE_TIME_QUARTERS" order="3" orderAttribute="#QUARTER" sortDirection="ASC"/>
+    <level levelAttribute="#MONTH" levelType="MDLEVEL_TYPE_TIME_MONTHS" order="4" orderAttribute="#MONTH" sortDirection="ASC"/>
+  </levels>
+</inlineHierarchy>
+<logicalModel id="M_TIME_DIMENSION_MONTH">
+  <attributes>
+    <attribute id="YEAR" key="true" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="YEAR"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION_MONTH" columnName="YEAR"/>
+    </attribute>
+    <attribute id="HALFYEAR" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="HALFYEAR"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION_MONTH" columnName="HALFYEAR"/>
+    </attribute>
+    <attribute id="QUARTER" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="QUARTER"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION_MONTH" columnName="QUARTER"/>
+    </attribute>
+    <attribute id="MONTH" key="true" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MONTH"/>
+      <keyMapping schemaName="_SYS_BI" columnObjectName="M_TIME_DIMENSION_MONTH" columnName="MONTH"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>
